@@ -5,6 +5,7 @@ __pycache__/
 *.pyc
 
 # Project data uploads and output assets
+storage/
 extract_*/
 *_extracted/
 *.zip
