@@ -1,0 +1,12 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: drone-redis
+    ports:
+      - "6379:6379"
+
+  node-odm:
+    image: opendronemap/nodeodm:latest
+    container_name: drone-odm
+    ports:
+      - "3000:3000"

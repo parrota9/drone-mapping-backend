@@ -1,0 +1,18 @@
+# Python virtual environment
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Project data uploads and output assets
+extract_*/
+*_extracted/
+*.zip
+*.tif
+*.tfw
+*.dxf
+*.pdf
+*.png
+
+# Docker local persistence
+.docker/
