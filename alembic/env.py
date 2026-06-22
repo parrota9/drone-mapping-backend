@@ -4,10 +4,7 @@ from sqlalchemy import engine_from_config, pool
 
 from alembic import context
 from app.core.database import Base
-from app.models.mission import Mission
-from app.models.run import Run
-from app.models.run_output import RunOutput
-from app.models.user import User
+from app.models import Mission, Run, RunOutput, User
 
 target_metadata = Base.metadata
 
