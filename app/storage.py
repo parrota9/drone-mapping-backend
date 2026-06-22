@@ -1,26 +1,27 @@
 import os
 
 import boto3
-from dotenv import load_dotenv
 from botocore.client import Config
 from botocore.exceptions import ClientError
 
-load_dotenv()
+from app.core.config import (
+    MINIO_ACCESS_KEY,
+    MINIO_BUCKET,
+    MINIO_ENDPOINT,
+    MINIO_SECRET_KEY,
+)
 
-BUCKET = "drone-missions"
-MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "http://localhost:9000")
-MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY", "minioadmin")
-MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY", "minioadmin")
+BUCKET = MINIO_BUCKET
 
 # Maps a friendly output name to a predicate that matches its MinIO key.
 # Only the first match per name is kept, so order matters for ambiguous patterns.
 _OUTPUT_PATTERNS = {
     "orthophoto_tif": lambda k: k.endswith("odm_orthophoto.tif"),
     "orthophoto_png": lambda k: k.endswith("odm_orthophoto.png"),
-    "dsm":            lambda k: k.endswith("dsm.tif"),
-    "dtm":            lambda k: k.endswith("dtm.tif"),
-    "point_cloud":    lambda k: k.endswith(".laz") or k.endswith(".las"),
-    "report":         lambda k: "odm_report" in k and k.endswith(".pdf"),
+    "dsm": lambda k: k.endswith("dsm.tif"),
+    "dtm": lambda k: k.endswith("dtm.tif"),
+    "point_cloud": lambda k: k.endswith(".laz") or k.endswith(".las"),
+    "report": lambda k: "odm_report" in k and k.endswith(".pdf"),
 }
 
 

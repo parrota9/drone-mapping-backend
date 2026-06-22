@@ -63,5 +63,23 @@ services:
       node-odm:
         condition: service_healthy
 
+  db:
+    image: postgres:16
+    container_name: drone-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: drone_mapping
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
 volumes:
   minio_data:
+  postgres_data:
